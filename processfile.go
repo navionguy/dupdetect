@@ -84,6 +84,9 @@ func processFile(w *worker) {
 	w.outp <- res
 }
 
+// loads a file of codes and puts them into a map for easy searching later
+// while loading, he checks for duplicates.  If one is found, the main
+// process is notified and execution ends
 func loadFile(r io.ReadCloser, fname string) (codeMap, error) {
 	kf := csv.NewReader(r)
 	defer r.Close()
